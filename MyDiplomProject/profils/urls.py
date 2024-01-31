@@ -6,6 +6,6 @@ app_name = 'profils'
 urlpatterns = [
     path('main/', Render_Main, name='main'),
     path('logun_users/', Render_Login, name='logun_users'),
-    #path('glavn/', Renderglavn, name='glavn'),
+
 
 ]
