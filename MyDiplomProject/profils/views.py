@@ -34,6 +34,7 @@ class UserLogoutView(View):
 
 class Registration(View):
 
+
     def post(self, request):
         User.objects.create(username=request.POST['login'], password=request.POST['password'])
         return render(request, 'profils/logun_users.html')

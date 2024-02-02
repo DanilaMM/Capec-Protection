@@ -7,7 +7,7 @@ class User(AbstractUser):
     mail = models.EmailField(unique=True, blank=True, null=True)
     number = models.CharField(max_length=12,blank=True, null=True)
 
-    USERNAME_FIELD = 'mail'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
 class Projcets(models.Model):
