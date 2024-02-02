@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import path
 from django.views import View
-
+from .models import User
 from . import views
 from django.contrib.auth import views as auth_views, login, authenticate, logout
 
@@ -32,7 +32,14 @@ class UserLogoutView(View):
         logout(request)
         return redirect('profils:main')
 
+class Registration(View):
 
+    def post(self, request):
+        User.objects.create(username=request.POST['login'], password=request.POST['password'])
+        return render(request, 'profils/logun_users.html')
+
+    def get(self, request):
+        return render(request, 'profils/registration.html')
 
 
 
