@@ -33,10 +33,9 @@ class UserLogoutView(View):
         return redirect('profils:main')
 
 class Registration(View):
-
-
     def post(self, request):
-        User.objects.create(username=request.POST['login'], password=request.POST['password'])
+        User.objects.create_user(username=request.POST['login'], password=request.POST['password'],
+                                 email=request.POST['mail'])
         return render(request, 'profils/logun_users.html')
 
     def get(self, request):
