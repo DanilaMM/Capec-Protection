@@ -8,7 +8,7 @@
 <p>Сюда попадает пользователь после авторизации</p>
 <p>Привет {{ request.user }}</p>
 <a href="{% url 'profils:logout_users' %}">Выйти</a>
-<a href="">Профиль</a>
+<a href="{% url 'profils:MyAccount' %}">Профиль</a>
 <a href="">Мои проекты</a>
 </body>
 </html>

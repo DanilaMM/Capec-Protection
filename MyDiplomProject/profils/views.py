@@ -43,5 +43,9 @@ class Registration(View):
 
 
 
+@login_required(login_url='profils:logun_users')
+def MyAccount(request):
+    return render(request,'profils/my_account.html')
+
 
 
