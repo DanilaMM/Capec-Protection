@@ -52,6 +52,7 @@ def Projects(request):
     return render(request,'profils/my_projects.html')
 
 
+@login_required(login_url='profils:logun_users')
 def Create_project(request):
     Projects.objects.create(is_wireless_tech=request.POST['is_wireless_tech'],
                             is_cloud_tech=request.POST['is_cloud_tech'],
