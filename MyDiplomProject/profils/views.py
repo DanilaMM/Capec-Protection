@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import path
 from django.views import View
-from .models import User
+from .models import User, Projcets
 from . import views
 from django.contrib.auth import views as auth_views, login, authenticate, logout
 
@@ -47,5 +47,20 @@ class Registration(View):
 def MyAccount(request):
     return render(request,'profils/my_account.html')
 
+@login_required(login_url='profils:logun_users')
+def Projects(request):
+    return render(request,'profils/my_projects.html')
 
 
+def Create_project(request):
+    Projects.objects.create(is_wireless_tech=request.POST['is_wireless_tech'],
+                            is_cloud_tech=request.POST['is_cloud_tech'],
+                            is_virtual_tech=request.POST['is_virtual_tech'],
+                            protection_class=request.POST['protection_class'],
+                            user_id=request.user.id)
+
+    # is_wireless_tech = models.BooleanField()
+    # is_cloud_tech = models.BooleanField()
+    # is_virtual_tech = models.BooleanField()
+    # protection_class = models.CharField(max_length=255)
+    # user = models.ForeignKey(User, on_delete=models.PROTECT)

@@ -44,7 +44,7 @@ class Projcets(models.Model):
     is_cloud_tech = models.BooleanField()
     is_virtual_tech = models.BooleanField()
     protection_class = models.CharField(max_length=255)
-
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 class R_person(models.Model):
     name = models.CharField(max_length=255)
     appointment = models.CharField(max_length=255)
