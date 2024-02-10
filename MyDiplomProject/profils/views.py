@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views, login, authenticate, logout
 def Render_Main(request):
     return render(request, 'profils/main.html')
 
+
 @login_required(login_url='profils:logun_users')
 def Render_glavn(request):
     return render(request, 'profils/glavn_str.html')
@@ -27,10 +28,13 @@ class UserLoginView(View):
 
     def get(self, request):
         return render(request, 'profils/logun_users.html')
+
+
 class UserLogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('profils:main')
+
 
 class Registration(View):
     def post(self, request):
@@ -42,26 +46,41 @@ class Registration(View):
         return render(request, 'profils/registration.html')
 
 
-
 @login_required(login_url='profils:logun_users')
 def MyAccount(request):
-    return render(request,'profils/my_account.html')
+    return render(request, 'profils/my_account.html')
+
 
 @login_required(login_url='profils:logun_users')
 def Projects(request):
-    return render(request,'profils/my_projects.html')
+    return render(request, 'profils/my_projects.html')
 
 
-@login_required(login_url='profils:logun_users')
-def Create_project(request):
-    Projects.objects.create(is_wireless_tech=request.POST['is_wireless_tech'],
-                            is_cloud_tech=request.POST['is_cloud_tech'],
-                            is_virtual_tech=request.POST['is_virtual_tech'],
-                            protection_class=request.POST['protection_class'],
-                            user_id=request.user.id)
 
-    # is_wireless_tech = models.BooleanField()
-    # is_cloud_tech = models.BooleanField()
-    # is_virtual_tech = models.BooleanField()
-    # protection_class = models.CharField(max_length=255)
-    # user = models.ForeignKey(User, on_delete=models.PROTECT)
+
+
+class CreateProject(View):
+
+    def post(self, request):
+        if request.POST['is_wireless_tech'] == 'True':
+            is_wireless = True
+        else:
+            is_wireless = False
+        if request.POST['is_cloud_tech'] == 'True':
+            is_cloud = True
+        else:
+            is_cloud = False
+        if request.POST['is_virtual_tech'] == 'True':
+            is_virtual = True
+        else:
+            is_virtual = False
+        print('1')
+        Projcets.objects.create(is_wireless_tech=is_wireless,
+                                is_cloud_tech=is_cloud,
+                                is_virtual_tech=is_virtual,
+                                protection_class=request.POST['protection_class'],
+                                user_id=request.user.id)
+        print('2')
+    def get(self, request):
+        print('3')
+        return render(request, 'profils/create_project.html')

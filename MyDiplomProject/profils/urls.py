@@ -1,6 +1,6 @@
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
 from django.urls import path, reverse_lazy
-from .views import Render_Main, UserLoginView, UserLogoutView, Render_glavn, Registration, MyAccount,Projects
+from .views import Render_Main, UserLoginView, UserLogoutView, Render_glavn, Registration, MyAccount,Projects,CreateProject
 
 app_name = 'profils'
 
@@ -33,5 +33,6 @@ urlpatterns = [
 
     path('registration/', Registration.as_view(), name='Registration'),
     path('my_account/', MyAccount, name='MyAccount'),
-    path('projects/',Projects,name='projects')
+    path('projects/',Projects,name='projects'),
+    path('create_projects/', CreateProject.as_view(), name='CreateProjects'),
 ]

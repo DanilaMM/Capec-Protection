@@ -45,6 +45,10 @@ class Projcets(models.Model):
     is_virtual_tech = models.BooleanField()
     protection_class = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
+
+
 class R_person(models.Model):
+    """Ответственные за проект"""
     name = models.CharField(max_length=255)
     appointment = models.CharField(max_length=255)
+    project = models.ForeignKey(Projcets, on_delete=models.PROTECT)
