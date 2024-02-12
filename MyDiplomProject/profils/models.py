@@ -40,9 +40,9 @@ class UserManager(BaseUserManager):
 
 class Projcets(models.Model):
     """Модель проектов"""
-    is_wireless_tech = models.BooleanField()
-    is_cloud_tech = models.BooleanField()
-    is_virtual_tech = models.BooleanField()
+    is_wireless_tech = models.BooleanField(default=True)
+    is_cloud_tech = models.BooleanField(default=True)
+    is_virtual_tech = models.BooleanField(default=True)
     protection_class = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
@@ -51,4 +51,4 @@ class R_person(models.Model):
     """Ответственные за проект"""
     name = models.CharField(max_length=255)
     appointment = models.CharField(max_length=255)
-    project = models.ForeignKey(Projcets, on_delete=models.PROTECT)
+

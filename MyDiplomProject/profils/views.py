@@ -56,9 +56,6 @@ def Projects(request):
     return render(request, 'profils/my_projects.html')
 
 
-
-
-
 class CreateProject(View):
 
     def post(self, request):
@@ -74,13 +71,16 @@ class CreateProject(View):
             is_virtual = True
         else:
             is_virtual = False
+
         print('1')
         Projcets.objects.create(is_wireless_tech=is_wireless,
                                 is_cloud_tech=is_cloud,
                                 is_virtual_tech=is_virtual,
                                 protection_class=request.POST['protection_class'],
                                 user_id=request.user.id)
-        print('2')
+        return render(request, 'profils/my_projects.html')
+
     def get(self, request):
-        print('3')
+        print(request)
+        print(1)
         return render(request, 'profils/create_project.html')
