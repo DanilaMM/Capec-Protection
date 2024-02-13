@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -40,13 +41,18 @@ class UserManager(BaseUserManager):
 
 class Projcets(models.Model):
     """Модель проектов"""
+    name_project = models.CharField(max_length=255,default='Тестовый',unique=False,null=False,blank=False)
     is_wireless_tech = models.BooleanField(default=True)
     is_cloud_tech = models.BooleanField(default=True)
     is_virtual_tech = models.BooleanField(default=True)
     protection_class = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return f"{self.protection_class} {self.is_virtual_tech}"
 
+    def get_absolute_url(self):
+        return reverse('profils:projects', kwargs={'id': self.pk})
 class R_person(models.Model):
     """Ответственные за проект"""
     name = models.CharField(max_length=255)

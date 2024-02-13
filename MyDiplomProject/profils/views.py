@@ -1,8 +1,12 @@
+
+
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import path
 from django.views import View
+from django.views.generic import ListView
+
 from .models import User, Projcets
 from . import views
 from django.contrib.auth import views as auth_views, login, authenticate, logout
@@ -51,9 +55,8 @@ def MyAccount(request):
     return render(request, 'profils/my_account.html')
 
 
-@login_required(login_url='profils:logun_users')
-def Projects(request):
-    return render(request, 'profils/my_projects.html')
+
+
 
 
 class CreateProject(View):
@@ -73,7 +76,8 @@ class CreateProject(View):
             is_virtual = False
 
         print('1')
-        Projcets.objects.create(is_wireless_tech=is_wireless,
+        Projcets.objects.create(name_project=request.POST['name_project'],
+                                is_wireless_tech=is_wireless,
                                 is_cloud_tech=is_cloud,
                                 is_virtual_tech=is_virtual,
                                 protection_class=request.POST['protection_class'],
@@ -84,3 +88,16 @@ class CreateProject(View):
         print(request)
         print(1)
         return render(request, 'profils/create_project.html')
+
+@login_required(login_url='profils:logun_users')
+def Projects(request):
+
+    users_project = Projcets.objects.filter(user_id=request.user.id)
+    data = {
+        'projects': users_project
+    }
+    return render(request, 'profils/my_projects.html', context=data)
+
+def Show_Projects(request,id):
+    return HttpResponse(f"Отображение статьи с id = {id}")
+
