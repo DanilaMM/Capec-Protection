@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
 
 class Projcets(models.Model):
     """Модель проектов"""
-    name_project = models.CharField(max_length=255,default='Тестовый',unique=False,null=False,blank=False)
+    name_project = models.CharField(max_length=255, default='Тестовый', unique=False, null=False, blank=False)
     is_wireless_tech = models.BooleanField(default=True)
     is_cloud_tech = models.BooleanField(default=True)
     is_virtual_tech = models.BooleanField(default=True)
@@ -52,7 +52,7 @@ class Projcets(models.Model):
         return f"{self.protection_class} {self.is_virtual_tech}"
 
     def get_absolute_url(self):
-        return reverse('profils:projects', kwargs={'id': self.pk})
+        return reverse('profils:detail_project', kwargs={'id': self.pk})
 class R_person(models.Model):
     """Ответственные за проект"""
     name = models.CharField(max_length=255)

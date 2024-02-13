@@ -91,7 +91,6 @@ class CreateProject(View):
 
 @login_required(login_url='profils:logun_users')
 def Projects(request):
-
     users_project = Projcets.objects.filter(user_id=request.user.id)
     data = {
         'projects': users_project
