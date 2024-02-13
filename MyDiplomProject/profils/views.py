@@ -98,5 +98,6 @@ def Projects(request):
     return render(request, 'profils/my_projects.html', context=data)
 
 def Show_Projects(request,id):
-    return HttpResponse(f"Отображение статьи с id = {id}")
+    users_project = Projcets.objects.filter(id=id)
+    return HttpResponse(f"Отображение статьи с id = {users_project[0].id}")
 
